@@ -60,7 +60,7 @@ data['mt'] = (data['regYear'] - 2016) * 12 + data['regMonth']
 
 
 
-
+# 利用规则填充popularity
 m1_1 = data.loc[(data.regYear==2017)&(data.regMonth==1) , 'popularity'].values / data.loc[(data.regYear==2016)&(data.regMonth==1), 'popularity'].values
 m1_2 = data.loc[(data.regYear==2017)&(data.regMonth==2) , 'popularity'].values / data.loc[(data.regYear==2016)&(data.regMonth==2), 'popularity'].values
 m1_3 = data.loc[(data.regYear==2017)&(data.regMonth==3) , 'popularity'].values / data.loc[(data.regYear==2016)&(data.regMonth==3), 'popularity'].values
@@ -73,7 +73,7 @@ data.loc[(data.regYear==2018)&(data.regMonth==4) , 'popularity'] = np.round( dat
 
 del m1_1,m1_2,m1_3,m1_4
 
-# # 构造历史特征
+# 构造历史特征
 def get_stat_feature(df_):   
     df = df_.copy()
     stat_feat = []
@@ -399,13 +399,13 @@ def get_sub(df, model_num, st,m_type):
                 data_df, stat_feat = get_stat_feature(df)
 #                data_df,count_feat = get_count_feature(data_df)
                 data_df = merge_sales_features(data_df, 'model', 1, month + 1)
-                data_df = merge_sales_features(data_df, 'bodyType', 13, month + 1)
+                data_df = merge_sales_features(data_df, 'bodyType', 1, month + 1)
                 data_df, count_his_feat = get_count_his_feature(data_df)   
             else:
                 data_df, stat_feat = get_stat_feature(df)
 #                data_df,count_feat = get_count_feature(data_df)
                 data_df = merge_sales_features(data_df, 'model', 1, month + 1)
-                data_df = merge_sales_features(data_df, 'bodyType', 13, month + 1)
+                data_df = merge_sales_features(data_df, 'bodyType', 1, month + 1)
                 data_df, count_his_feat = get_count_his_feature(data_df)
                 data_df, trend_feat = get_trend_feature(data_df)
                 data_df, windows_feat = merge_rolling(data_df)
